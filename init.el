@@ -11,11 +11,10 @@
 
 (defun select-nth-window (n)
   "Focus Nth window"
-  (interactive)
- (set-frame-selected-window (selected-frame)
-                 (frame-first-window))
-  (set-frame-selected-window (selected-frame)
-                 (nth n (window-list))))
+ (interactive)
+ (set-frame-selected-window (selected-frame) (frame-first-window))
+ (set-frame-selected-window (selected-frame) (nth n (window-list)))
+)
 
 
 ;;init neotree
@@ -69,7 +68,7 @@
 (lambda (&optional dummy)
   (unless (file-exists-p "Makefile")
       (set (make-local-variable 'compile-command)
-      (let ((file (file-name-nondirectory (buffer-file-name)))) ;buffer-file-name
+      (let ((file (file-name-nondirectory (buffer-file-name))))
          (concat "g++ -g -O2 -Wall -o " 
             (file-name-sans-extension file)
             " " file))))
@@ -81,8 +80,6 @@
 (when (file-exists-p "./.git/config")
 (select-nth-window 2)
 (git-status nil))
-
-
 
 
 ;;переходим в верхнее окно
@@ -138,7 +135,9 @@
 ;  (when (string= (file-name-extension buffer-file-name) "cc")
 ;;    (typescript-mode)
 ;;    (tss-setup-current-buffer)
-;        (linum-mode)
+;    (customize-set-variable
+;     'display-buffer-alist
+;     '(current-buffer-name (display-buffer-same-window)))
 ;   )
-;;))
+;)
 
