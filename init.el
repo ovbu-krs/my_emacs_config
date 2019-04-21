@@ -3,6 +3,9 @@
 (setq inhibit-splash-screen   t)
 (setq ingibit-startup-message t) ;; экран приветствия можно вызвать комбинацией C-h C-a
 
+;;включчаем и настраиваем подсветку
+(show-paren-mode t)   
+;(setq show-paren-style 'expression) ; подсвечивает блоки, но раздражает
 
 
 
@@ -26,6 +29,7 @@
   (autoload 'neotree "neotree" "" t) 
   (setq neo-window-width 50) 
   (setq neo-persist-show nil)
+  (setq neo-buffer--show-hidden-file-p t)
 ;  (neo-show-hidden-files nil)
 
 (neotree-show)
@@ -91,6 +95,7 @@
 (select-nth-window 0)
 
 
+;;устанвока темы emacs
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -110,17 +115,30 @@
 
 
 
-(defun display-on-side (buffer &optional not-this-window frame)
+
+;(defun display-on-side (buffer &optional not-this-window frame)
 ;    (select-nth-window 1)	
 ;    (select-nth-window 0)
 
-    (let* ((window (or (minibuffer-selected-window)
-                     (selected-window)))
-         (display-buffer-function nil)
-         (pop-up-windows nil))
-    (with-selected-window (or window (error "display-on-side"))
-      (when (one-window-p t)
-        (split-window-horizontally))
-      (display-buffer buffer not-this-window frame))))
+;    (let* ((window (or (minibuffer-selected-window)
+;                     (selected-window)))
+;         (display-buffer-function nil)
+;         (pop-up-windows nil))
+;    (with-selected-window (or window (error "display-on-side"))
+;      (when (one-window-p t)
+;        (split-window-horizontally))
+;      (display-buffer buffer not-this-window frame))))
  
-(setq display-buffer-function 'display-on-side)
+;(setq display-buffer-function 'display-on-side)
+
+
+;;функция которая поволяет обрабатывать собтия при открии файла с определенным расширением
+;(add-hook 'find-file-hook 'my-project-hook)
+;(defun my-project-hook ()
+;  (when (string= (file-name-extension buffer-file-name) "cc")
+;;    (typescript-mode)
+;;    (tss-setup-current-buffer)
+;        (linum-mode)
+;   )
+;;))
+
